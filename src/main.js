@@ -20,5 +20,4 @@ function onTileClick(i) {
 	// update board
 	gameView.updateBoard(game);
 	// change turn
-	game.nextTurn();
 }

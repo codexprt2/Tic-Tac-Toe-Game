@@ -14,11 +14,16 @@ export default class Game {
 	}
 
 	makeMove(i) {
-		if (this.board[i]) {
-			return;
-		}
+		if (this.endOfGame())
+			if (this.board[i]) {
+				return;
+			}
 		this.board[i] = this.turn;
-		this.findWinningCombinations();
+		let winningCombination = this.findWinningCombinations();
+		console.log("this is the winner:", winningCombination);
+		if (!winningCombination) {
+			this.nextTurn();
+		}
 	}
 	findWinningCombinations() {
 		const winningCombinations = [
@@ -33,6 +38,24 @@ export default class Game {
 		];
 		for (const combination of winningCombinations) {
 			console.log(combination);
+			const [a, b, c] = combination;
+
+			if (
+				this.board[a] &&
+				this.board[a] === this.board[b] &&
+				this.board[a] === this.board[b]
+			) {
+				return combination;
+			}
+			return null;
+		}
+	}
+	endOfGame() {
+		let winningCombination = this.findWinningCombinations();
+		if (winningCombination) {
+			return true;
+		} else {
+			return false;
 		}
 	}
 }
